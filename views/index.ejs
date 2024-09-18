@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('./templates/header.ejs')%>
+
+    <body>
+        <div class="container" style="padding: 20px; max-width: 900px; margin: 0 auto;">
+            <div class="card">
+                <div class="card-header">
+                    <h1 style="text-align: center;">
+                        <h1>Añadir nuevo </h1>
+                    </h1>
+                </div>
+                <div class="card-body">
+
+                    <form id="objetoForm" action="/agregar" method="POST">
+                        <div class="mb-3">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="departamento">Departamento:</label>
+                            <select id="departamento" name="departamento">
+                                <% departamentos.forEach(depto=> { %>
+                                    <option value="<%= depto.code %>">
+                                        <%= depto.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="municipio">Municipio:</label>
+                            <select id="municipio" name="municipio">
+                                <option value="">Seleccione un municipio</option>
+                            </select>
+                        </div>
+
+                        <button type="submit">Agregar</button>
+                    </form>
+                    <br><br>
+                    <h2>Agregados</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Municipio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% objetos.forEach(obj=> { %>
+                                <tr>
+                                    <td>
+                                        <%= obj.nombre %>
+                                    </td>
+                                    <td>
+                                        <%= obj.departamento %>
+                                    </td>
+                                    <td>
+                                        <%= obj.municipio %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+
+                    <script src="/js/main.js"></script>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
